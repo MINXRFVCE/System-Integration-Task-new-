@@ -1,45 +1,89 @@
 @startuml
-left to right direction
-actor "Клиент" as Client
-actor "Директор" as Director
+top to bottom direction
 
-rectangle "CarWasher" {
-  usecase "US_A01: Регистрация пользователя" as Register
-  usecase "Ошибка подтверждения номера" as PhoneError
-  usecase "Подтверждение номера телефона" as PhoneConfirm
-  usecase "US_S01: Выбор автомойки" as CarWashChoice
-  usecase "Выбор города" as CityChoice
-  usecase "Выбор адреса" as AddressChoice
-  usecase "Выбор по поиску" as SearchChoice
-  usecase "US_P01: Оплата услуги" as PaymentService
-  usecase "Оплата" as Payment
-  usecase "Выбор способа оплаты" as PaymentMethod
-  usecase "Предоставление статистики о работе мойщиков" as Statistics
-  usecase "Отображение графиков (mini-bi)" as Graphs
-  usecase "Выгрузка CSV" as CSVExport
+actor "Пользователь" as User
+actor "Администратор" as Admin
+
+rectangle "Система управления автомойками" as CarWashSystem {
+  rectangle "Модуль клиентов" as ClientModule {
+    usecase "UC-001: Регистрация в системе" as Registration
+    usecase "UC-002: Верификация номера телефона" as Verification
+    usecase "UC-003: Обработка ошибок верификации" as VerificationError
+  }
+  
+  rectangle "Модуль поиска" as SearchModule {
+    usecase "UC-101: Поиск автомоек" as SearchCarWash
+    usecase "UC-102: Фильтрация по городу" as CityFilter
+    usecase "UC-103: Фильтрация по адресу" as AddressFilter
+    usecase "UC-104: Поиск по названию" as NameSearch
+  }
+  
+  rectangle "Модуль оплаты" as PaymentModule {
+    usecase "UC-201: Оформление заказа" as CreateOrder
+    usecase "UC-202: Выбор способа оплаты" as SelectPaymentMethod
+    usecase "UC-203: Процесс оплаты" as ProcessPayment
+  }
+  
+  rectangle "Модуль аналитики" as AnalyticsModule {
+    usecase "UC-301: Просмотр статистики персонала" as ViewStats
+    usecase "UC-302: Анализ эффективности работы" as PerformanceAnalysis
+    usecase "UC-303: Визуализация данных" as DataVisualization
+    usecase "UC-304: Экспорт отчетов" as ExportReports
+  }
 }
 
-rectangle "СМС шлюз" as SMS
-rectangle "Платёжная система" as PaySystem
-rectangle "1С система" as System1C
+rectangle "Внешние сервисы" as ExternalServices {
+  usecase "Отправка СМС" as SMSService
+  usecase "Обработка платежей" as PaymentGateway
+  usecase "Интеграция с бухгалтерией" as AccountingSystem
+}
 
-Client --> Register
-Register ..> PhoneConfirm : include
-Register ..> PhoneError : extend
-PhoneConfirm --> SMS
+' Связи модуля клиентов
+User --> Registration
+Registration ..> Verification : включает
+Registration ..> VerificationError : расширяет
+Verification --> SMSService
 
-Client --> CarWashChoice
-CarWashChoice --> CityChoice
-CarWashChoice --> AddressChoice
-CarWashChoice --> SearchChoice
+' Связи модуля поиска
+User --> SearchCarWash
+SearchCarWash ..> CityFilter : включает
+SearchCarWash ..> AddressFilter : включает
+SearchCarWash ..> NameSearch : включает
 
-Client --> PaymentService
-PaymentService --> Payment
-PaymentService --> PaymentMethod
-Payment --> PaySystem
-Payment --> System1C
+' Связи модуля оплаты
+User --> CreateOrder
+CreateOrder ..> SelectPaymentMethod : включает
+CreateOrder ..> ProcessPayment : включает
+ProcessPayment --> PaymentGateway
+ProcessPayment --> AccountingSystem
 
-Director --> Statistics
-Statistics --> Graphs
-Statistics --> CSVExport
+' Связи модуля аналитики
+Admin --> ViewStats
+ViewStats ..> PerformanceAnalysis : включает
+ViewStats ..> DataVisualization : включает
+ViewStats ..> ExportReports : включает
+
+' Дополнительные связи
+VerificationError --> SMSService : альтернативный поток
+ExportReports --> AccountingSystem : обмен данными
+
+note right of Registration
+  Процесс регистрации включает
+  обязательную верификацию
+  номера телефона
+end note
+
+note left of ViewStats
+  Статистика включает аналитику
+  по эффективности работы
+  мойщиков и загрузке боксов
+end note
+
+legend right
+  | Цветовая схема |
+  Модули выделены для
+  лучшей визуализации
+  структуры системы
+end legend
+
 @enduml
