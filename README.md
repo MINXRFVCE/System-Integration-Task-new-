@@ -28,7 +28,7 @@
 | **IV** | **UseCase диаграмма** | Прецеденты использования системы | [`UseCase_UML.md`](./UseCase_UML.md) <br> ![UseCase](./UseCase%20Diagram.png) |
 | **V** | **User Story** | Пользовательские сценарии | [`User_story.md`](./User_story.md) |
 | **VI** | **User Story Mapping** | Карта пользовательских историй | [`UserStory Mapping.unidraw`](./UserStory%20Mapping.unidraw) |
-| **VII** | **Status Model** | Модель статусов заказов | [`Status Model.md`](./Status%20Model.md) <br> ![Status Model](./Status%20Model.png) |
+| **VII** | **Status Model** | Модель статусов заказов | [`Status Model.md`](./Status%20Model.md) <br> ![Status Model](./Status%20model.png) |
 | **VIII** | **OpenAPI спецификация** | API документация | [`Open API Code - carswsh.yaml`](./Open%20API%20Code%20-%20carswsh.yaml) |
 
 ## 📚 Документация
