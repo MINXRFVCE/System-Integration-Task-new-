@@ -24,8 +24,8 @@
 |---|-----------|----------|-------|
 | **I** | **Требования** | Функциональные и нефункциональные требования | [`Требования.md`](./Требования.md) |
 | **II** | **Диаграмма последовательности** | Взаимодействие компонентов системы | [`Sequence Diagram.md`](./Sequence%20Diagram.md) <br> ![Диаграмма](./Sequence%20Diagram.png) |
-| **III** | **ERD диаграмма** | Модель данных и отношения сущностей | [`ERD.md`](./ERD.md) <br> ![ERD](./ERD%20Diagram.png) |
-| **IV** | **UseCase диаграмма** | Прецеденты использования системы | [`UseCase_UML.md`](./UseCase_UML.md) <br> ![UseCase](./UseCase.png) |
+| **III** | **ERD диаграмма** | Модель данных и отношения сущностей | [`ERD.md`](./ERD.md) <br> ![ERD](./ERDdiagram.png) |
+| **IV** | **UseCase диаграмма** | Прецеденты использования системы | [`UseCase_UML.md`](./UseCase_UML.md) <br> ![UseCase](./UseCase%20Diagram.png) |
 | **V** | **User Story** | Пользовательские сценарии | [`User_story.md`](./User_story.md) |
 | **VI** | **User Story Mapping** | Карта пользовательских историй | [`UserStory Mapping.unidraw`](./UserStory%20Mapping.unidraw) |
 | **VII** | **Status Model** | Модель статусов заказов | [`Status Model.md`](./Status%20Model.md) <br> ![Status Model](./Status%20Model.png) |
